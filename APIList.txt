@@ -1,0 +1,25 @@
+Product api's :
+1) get Products
+2) get one Product
+3) rate Product
+4) add a Product
+5) filter Products
+6) add items to cart
+7) remove items from the cart
+8) get items in the cart
+
+
+user api's
+1) signup - email, password, name, typeOfUser (customer, seller)
+2) signin - email, password 
+
+
+
+// to get the number of ratings per product
+db.products.aggregate([
+    {
+        $project: {name:1, countOfRating:{
+            $cond: {if: {$isArray: "$ratings"}, then: {$size: "$ratings"}, else: 0}
+        }}
+    }
+])
